@@ -1,0 +1,24 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+actor Publisher
+actor Consumer
+actor Coordinator
+rectangle "National open data catalog" {
+    usecase "Register dataset" as ucRegDS
+    usecase "Update dataset registration" as ucUpdateDS
+    usecase "Unregister dataset" as ucUnregDS
+    usecase "Search datasets" as ucSearchDS
+    usecase "Read quality report" as ucReadQualityReport
+    usecase "Validate dataset record" as ucValidateDS
+    Publisher -- ucRegDS
+    ucRegDS <.. ucValidateDS : <<extend>>
+    ucUpdateDS <.. ucValidateDS : <<extend>>
+    Publisher -- ucUpdateDS
+    Publisher -- ucUnregDS
+    Consumer -up- ucSearchDS
+    ucUpdateDS ..> ucSearchDS : <<include>>
+    ucUnregDS ..> ucSearchDS : <<include>>
+    Coordinator -- ucReadQualityReport
+}
+@enduml
