@@ -43,23 +43,43 @@ This section specifies the functional requirements.
 ```plantuml
 @startuml
 left to right direction
-actor Guest as g
-package Professional {
-  actor Chef as c
-  actor "Food Critic" as fc
-}
-package Restaurant {
-  usecase "Eat Food" as UC1
-  usecase "Pay for Food" as UC2
-  usecase "Drink" as UC3
-  usecase "Review" as UC4
-  usecase "Cook Food" as UC5
-}
-c --> UC5
-fc --> UC4
-g --> UC1
-g --> UC2
-g --> UC3
+actor Student as s
+actor Teacher as t
+usecase "Sign in" as SI
+usecase "Get credit" as GC1
+usecase "Enqueue for waiting list" as QWL1
+usecase "View exam calendar" as VEC1
+usecase "Filter exams" as FE1
+usecase "View exam result" as VER1
+usecase "Sign out" as SO1
+usecase "Kick student out" as KSO1
+usecase "Publish result" as PR
+usecase "Make/create exam date" as MED
+usecase "Change exam date&time" as CED
+usecase "Not pass exam" as NPE
+usecase "Pass exam" as PE
+ 
+s --> GC1
+s --> QWL1
+s --> VEC1
+s --> FE1
+s --> VER1
+s --> SO1
+
+VER1 --> NPE : <<include>>
+VER1 --> PE : <<include>>
+GC1 --> SI : <<include>>
+VEC1 --> SI : <<include>>
+FE1 --> SI : <<extend>>
+QWL1 --> SI : <<extend>>
+MED --> SI : <<include>>
+PR --> VER1 : <<include>>
+PR --> VER1 : <<include>>
+MED --> CED : <<include>>
+
+t --> KSO1
+t --> PR
+t --> MED
 @enduml
 ```
 
