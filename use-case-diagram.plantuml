@@ -1,24 +1,38 @@
-@startuml
+@startuml UseCases1
 left to right direction
-skinparam packageStyle rectangle
-actor Publisher
-actor Consumer
-actor Coordinator
-rectangle "National open data catalog" {
-    usecase "Register dataset" as ucRegDS
-    usecase "Update dataset registration" as ucUpdateDS
-    usecase "Unregister dataset" as ucUnregDS
-    usecase "Search datasets" as ucSearchDS
-    usecase "Read quality report" as ucReadQualityReport
-    usecase "Validate dataset record" as ucValidateDS
-    Publisher -- ucRegDS
-    ucRegDS <.. ucValidateDS : <<extend>>
-    ucUpdateDS <.. ucValidateDS : <<extend>>
-    Publisher -- ucUpdateDS
-    Publisher -- ucUnregDS
-    Consumer -up- ucSearchDS
-    ucUpdateDS ..> ucSearchDS : <<include>>
-    ucUnregDS ..> ucSearchDS : <<include>>
-    Coordinator -- ucReadQualityReport
-}
+actor Student as s
+actor Teacher as t
+usecase "Enroll for exam" as SI
+usecase "Get credit" as GC1
+usecase "Enqueue for waiting list" as QWL1
+usecase "View exam calendar" as VEC1
+usecase "Filter exams" as FE1
+usecase "View exam result" as VER1
+usecase "Unenroll from exam" as SO1
+usecase "Kick student out" as KSO1
+usecase "Publish result" as PR
+usecase "Make/create exam date" as MED
+usecase "Change exam date&time" as CED
+usecase "Not pass exam" as NPE
+usecase "Pass exam" as PE
+ 
+s --> GC1
+s --> QWL1
+s --> VEC1
+s --> FE1
+s --> VER1
+s --> SO1
+
+VER1 --> NPE
+VER1 --> PE
+GC1 --> SI : <<extend>>
+VEC1 --> SI : <<include>>
+FE1 --> SI : <<include>>
+QWL1 --> SI : <<extend>>
+PR --> VER1 : <<include>>
+MED --> CED : <<extend>>
+
+t --> KSO1
+t --> PR
+t --> MED
 @enduml
