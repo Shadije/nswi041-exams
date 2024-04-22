@@ -45,13 +45,13 @@ This section specifies the functional requirements.
 left to right direction
 actor Student as s
 actor Teacher as t
-usecase "Sign in" as SI
+usecase "Enroll" as SI
 usecase "Get credit" as GC1
 usecase "Enqueue for waiting list" as QWL1
 usecase "View exam calendar" as VEC1
 usecase "Filter exams" as FE1
 usecase "View exam result" as VER1
-usecase "Sign out" as SO1
+usecase "Unenroll" as SO1
 usecase "Kick student out" as KSO1
 usecase "Publish result" as PR
 usecase "Make/create exam date" as MED
